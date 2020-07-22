@@ -103,8 +103,8 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link href="#">
+      <li class="{{ (Request::is('dataRegistrasi')) ? 'nav-item active' : 'nav-item' }}">
+        <a class="nav-link" href="{{url('dataRegistrasi')}}">
           <i class="fas fa-fw fa-folder"></i>
           <span>Registrasi</span>
         </a>

@@ -22,6 +22,6 @@ class Kamar extends Model
 
     public function registrasi()
     {
-        return $this->belongsToMany(Registrasi::class);
+        return $this->hasMany(Registrasi::class);
     }
 }

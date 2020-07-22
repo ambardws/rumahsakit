@@ -139,13 +139,13 @@
           processing: true,
           serverSide: true,
   
-          ajax: "{{ route('dataPasien.index') }}",
+          ajax: "{{ route('dataRegistrasi.index') }}",
           columns: [
-              {data: 'DT_RowIndex', name:'DT_RowIndex' },
-              {data: 'nama_pasien', name: 'nama_pasien'},
-              {data: 'tanggal_lahir', name: 'tanggal_lahir'},
-              {data: 'nama_dokter', name: 'nama_dokter'},
-              {data: 'nama_kamar', name: 'nama_kamar'},
+              {data: 'kd_reg', name:'kd_reg' },
+              {data: 'pasien.nama_pasien', name: 'pasien.nama_pasien'},
+              {data: 'pasien.tanggal_lahir', name: 'pasien.tanggal_lahir'},
+              {data: 'dokter.nama_dokter', name: 'dokter.nama_dokter'},
+              {data: 'kamar.nama_kamar', name: 'kamar.nama_kamar'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
           ]
       });  

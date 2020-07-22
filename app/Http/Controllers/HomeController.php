@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Kamar;
+use App\Dokter;
+use App\Pasien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,13 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $total_pasien = \App\Pasien::all()->count();
-        $total_dokter = \App\Dokter::all()->count();
-        $total_kamar = \App\Kamar::all()->count();
+        $total_pasien = Pasien::all()->count();
+        $total_dokter = Dokter::all()->count();
+        $total_kamar = Kamar::all()->count();
+        $total_kasur = Kamar::sum('jumlah_kasur');
         return view('home', [
             'total_pasien' => $total_pasien,
             'total_dokter' => $total_dokter,
-            'total_kamar' => $total_kamar
+            'total_kamar' => $total_kamar,
+            'total_kasur' => $total_kasur
         ]);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Kamar;
 use App\Pasien;
 use App\Dokter;
+use App\Registrasi;
 
 class RegistrasiController extends Controller
 {
@@ -30,22 +31,20 @@ class RegistrasiController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Kamar::latest()->get();
+            $data = Registrasi::with('dokter', 'pasien', 'kamar');
             return DataTables::eloquent($data)
-                ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_kamar="' . $row->kd_kamar . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editKamar">Edit</a>';
 
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-kd_kamar="' . $row->kd_kamar . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteKamar">Delete</a>';
                     return $btn;
                 })
-                ->addCol
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
 
-        return view('DataMaster.DataKamar');
+        return view('Registrasi.DataRegistrasi');
     }
 
     /**

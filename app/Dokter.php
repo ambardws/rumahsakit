@@ -14,6 +14,12 @@ class Dokter extends Model
         'nama_dokter', 'tempat_lahir', 'tanggal_lahir', 'alamat_dokter', 'telepon', 'spesialiasi_dokter'
     ];
 
+    public function registrasi()
+    {
+        return $this->hasMany(Registrasi::class);
+    }
+
+
 
     // public function pasien()
     // {
