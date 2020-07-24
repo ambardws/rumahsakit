@@ -8,6 +8,7 @@ use App\Kamar;
 use App\Pasien;
 use App\Dokter;
 use App\Registrasi;
+use Illuminate\Support\Facades\View;
 
 class RegistrasiController extends Controller
 {
@@ -34,17 +35,22 @@ class RegistrasiController extends Controller
             $data = Registrasi::with('dokter', 'pasien', 'kamar');
             return DataTables::eloquent($data)
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_kamar="' . $row->kd_kamar . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editKamar">Edit</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-kd_kamar="' . $row->kd_kamar . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteKamar">Delete</a>';
+                    $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_reg="' . $row->kd_reg . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editRegistrasi">Edit</a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-kd_reg="' . $row->kd_reg . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteRegistrasi">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $pasien = Pasien::all(['kd_pasien', 'nama_pasien']);
+        $dokter = Dokter::all(['kd_dokter', 'nama_dokter']);
+        $kamar = Kamar::all(['kd_kamar', 'nama_kamar', 'jumlah_kasur']);
 
-
-        return view('Registrasi.DataRegistrasi');
+        return View::make('Registrasi.DataRegistrasi', compact('pasien', 'dokter', 'kamar'));
+        // return view('Registrasi.DataRegistrasi');
     }
 
     /**
@@ -58,15 +64,26 @@ class RegistrasiController extends Controller
 
     {
 
-        Kamar::updateOrCreate(
-            ['kd_kamar' => $request->Kamar_id],
+        Registrasi::updateOrCreate(
+            ['kd_reg' => $request->Reg_id],
 
             [
-                'nama_kamar' => $request->namakamar,
-                'kelas' => $request->kelas,
-                'jumlah_kasur' => $request->jumlahkasur
+                'kd_pasien' => $request->namapasien,
+                'kd_dokter' => $request->namadokter,
+                'kd_kamar' => $request->namakamar
             ]
         );
+        // $this->validate($request, [
+        //     'kd_pasien'    => 'required',
+        //     'kd_kamar'     => 'required',
+        //     'kd_dokter'    => 'required'
+        // ]);
+
+        // Registrasi::create($request->all());
+
+        $kamar = Kamar::findOrFail($request->namakamar);
+        $kamar->jumlah_kasur -= 1;
+        $kamar->save();
 
 
         return response()->json(['success' => 'Item saved successfully.']);
@@ -79,11 +96,12 @@ class RegistrasiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit($kd_kamar)
+    public function edit($kd_reg)
     {
-        $kamar = Kamar::find($kd_kamar);
-        return response()->json($kamar);
+        $registrasi = Registrasi::find($kd_reg);
+        return response()->json($registrasi);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -92,9 +110,12 @@ class RegistrasiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy($kd_kamar)
+    public function destroy($kd_reg)
     {
-        Kamar::find($kd_kamar)->delete();
+        Registrasi::find($kd_reg)->delete();
+        $kamar = Kamar::findOrFail($kd_reg);
+        $kamar->jumlah_kasur += 1;
+        $kamar->save();
         return response()->json(['success' => 'Item deleted successfully.']);
     }
 }

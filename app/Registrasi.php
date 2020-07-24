@@ -11,6 +11,8 @@ class Registrasi extends Model
 
     protected $primaryKey = 'kd_reg';
 
+    protected $fillable = ['kd_pasien', 'kd_kamar', 'kd_dokter'];
+
     public function kamar()
     {
         return $this->belongsTo(Kamar::class, 'kd_kamar', 'kd_kamar');
