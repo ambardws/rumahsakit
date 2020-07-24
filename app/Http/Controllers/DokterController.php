@@ -73,7 +73,7 @@ class DokterController extends Controller
         );
 
 
-        return response()->json(['success' => 'Item saved successfully.']);
+        return response()->json(['message' => 'Dokter Berhasil Disimpan']);
     }
 
     /**
@@ -99,6 +99,6 @@ class DokterController extends Controller
     public function destroy($kd_dokter)
     {
         Dokter::find($kd_dokter)->delete();
-        return response()->json(['success' => 'Item deleted successfully.']);
+        return response()->json(['message' => 'Dokter Berhasil Dihapus.']);
     }
 }

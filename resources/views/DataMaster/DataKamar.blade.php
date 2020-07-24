@@ -82,7 +82,7 @@
   
           ajax: "{{ route('dataKamar.index') }}",
           columns: [
-              {data: 'DT_RowIndex', name:'DT_RowIndex' },
+              {data: 'DT_RowIndex', name:'DT_RowIndex'},
               {data: 'nama_kamar', name: 'nama_kamar'},
               {data: 'kelas', name: 'kelas'},
               {data: 'jumlah_kasur', name: 'jumlah_kasur'},
@@ -126,12 +126,21 @@
               $('KamarForm').trigger("reset");
               $('#ajaxModel').modal('hide');
               table.draw();
+              swal({
+                    title: 'Success!',
+                    text: data.message,
+                    type: 'success'
+                  })
           },
 
           error: function (data) {
               console.log('Error:', data);
               $('#saveBtn').html('Simpan');
-
+              swal({
+                    title: 'Oops...',
+                    text: data.message,
+                    type: 'error'
+                    })
           }
         });
       });
@@ -139,18 +148,36 @@
       
       $('body').on('click', '.deleteKamar', function () {
         var Kamar_id = $(this).data("kd_kamar");
-        confirm("Are You sure want to delete !");
+        swal({
+              title: 'Apa kamu yakin?',
+              text: "Anda tidak akan dapat mengembalikan ini!",
+              type: 'warning',
+              showCancelButton: true,
+              cancelButtonColor: '#d33',
+              confirmButtonClass: '#3085d6',
+              confirmButtonText: 'Iya, Hapus ini!'
+        }).then(function(){
         $.ajax({
             type: "DELETE",
             url: "{{ route('dataKamar.store') }}"+'/'+Kamar_id,
             success: function (data) {
                 table.draw();
+                swal({
+                      title: 'Success!',
+                      text: data.message,
+                      type: 'success'
+                    })
             },
             error: function (data) {
                 console.log('Error:', data);
+                swal({
+                        title: 'Oops...',
+                        text: data.message,
+                        type: 'error'
+                      })
             }
         });
-
+      });
     });
 
   });

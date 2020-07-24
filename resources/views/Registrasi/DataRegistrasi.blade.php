@@ -101,7 +101,7 @@
   
           ajax: "{{ route('dataRegistrasi.index') }}",
           columns: [
-              {data: 'kd_reg', name:'kd_reg' },
+              {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
               {data: 'pasien.nama_pasien', name: 'pasien.nama_pasien'},
               {data: 'pasien.tanggal_lahir', name: 'pasien.tanggal_lahir'},
               {data: 'dokter.nama_dokter', name: 'dokter.nama_dokter'},
@@ -146,16 +146,24 @@
           type: "POST",
           dataType: 'json',
           success: function (data) {
-
               $('PasienForm').trigger("reset");
               $('#ajaxModel').modal('hide');
               table.draw();
+              swal({
+                    title: 'Success!',
+                    text: data.message,
+                    type: 'success'
+                  })
           },
 
           error: function (data) {
               console.log('Error:', data);
               $('#saveBtn').html('Simpan');
-
+              swal({
+                    title: 'Oops...',
+                    text: data.message,
+                    type: 'error'
+                    })
           }
         });
       });
@@ -163,19 +171,38 @@
       
       $('body').on('click', '.deleteRegistrasi', function () {
         var Reg_id = $(this).data("kd_reg");
-        confirm("Are You sure want to delete !");
+        swal({
+              title: 'Apa kamu yakin?',
+              text: "Anda tidak akan dapat mengembalikan ini!",
+              type: 'warning',
+              showCancelButton: true,
+              cancelButtonColor: '#d33',
+              confirmButtonClass: '#3085d6',
+              confirmButtonText: 'Iya, Hapus ini!'
+        }).then(function(){
         $.ajax({
             type: "DELETE",
             url: "{{ route('dataRegistrasi.store') }}"+'/'+Reg_id,
             success: function (data) {
                 table.draw();
-            },
+                swal({
+                      title: 'Success!',
+                      text: data.message,
+                      type: 'success'
+                    })
+                },
             error: function (data) {
                 console.log('Error:', data);
-            }
+                swal({
+                        title: 'Oops...',
+                        text: data.message,
+                        type: 'error'
+                      })
+              } 
+         });
         });
+      });
 
-    });
 
   });
  

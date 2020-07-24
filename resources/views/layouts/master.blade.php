@@ -24,7 +24,10 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script src="vendor/sweetalert/sweetalert2.min.js"></script>
+  <link href="vendor/sweetalert/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">

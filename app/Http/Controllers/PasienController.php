@@ -82,7 +82,7 @@ class PasienController extends Controller
         );
 
 
-        return response()->json(['success' => 'Item saved successfully.']);
+        return response()->json(['message' => 'Pasien Berhasil Disimpan']);
     }
 
     /**
@@ -108,6 +108,6 @@ class PasienController extends Controller
     public function destroy($kd_pasien)
     {
         Pasien::find($kd_pasien)->delete();
-        return response()->json(['success' => 'Item deleted successfully.']);
+        return response()->json(['message' => 'Pasien Berhasil Dihapus']);
     }
 }

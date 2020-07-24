@@ -149,16 +149,24 @@
           type: "POST",
           dataType: 'json',
           success: function (data) {
-
               $('DokterForm').trigger("reset");
               $('#ajaxModel').modal('hide');
               table.draw();
+              swal({
+                    title: 'Success!',
+                    text: data.message,
+                    type: 'success'
+                  })
           },
 
           error: function (data) {
               console.log('Error:', data);
               $('#saveBtn').html('Simpan');
-
+              swal({
+                    title: 'Oops...',
+                    text: data.message,
+                    type: 'error'
+                    })
           }
         });
       });
@@ -166,18 +174,36 @@
       
       $('body').on('click', '.deleteDokter', function () {
         var Dokter_id = $(this).data("kd_dokter");
-        confirm("Are You sure want to delete !");
+        wal({
+              title: 'Apa kamu yakin?',
+              text: "Anda tidak akan dapat mengembalikan ini!",
+              type: 'warning',
+              showCancelButton: true,
+              cancelButtonColor: '#d33',
+              confirmButtonClass: '#3085d6',
+              confirmButtonText: 'Iya, Hapus ini!'
+        }).then(function(){
         $.ajax({
             type: "DELETE",
             url: "{{ route('dataDokter.store') }}"+'/'+Dokter_id,
             success: function (data) {
                 table.draw();
+                swal({
+                      title: 'Success!',
+                      text: data.message,
+                      type: 'success'
+                    })
             },
             error: function (data) {
                 console.log('Error:', data);
+                swal({
+                        title: 'Oops...',
+                        text: data.message,
+                        type: 'error'
+                      })
             }
         });
-
+      });
     });
 
   });

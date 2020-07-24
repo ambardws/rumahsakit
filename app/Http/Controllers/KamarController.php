@@ -67,7 +67,7 @@ class KamarController extends Controller
         );
 
 
-        return response()->json(['success' => 'Item saved successfully.']);
+        return response()->json(['message' => 'Kamar Berhasi Disimpan']);
     }
 
     /**
@@ -93,6 +93,6 @@ class KamarController extends Controller
     public function destroy($kd_kamar)
     {
         Kamar::find($kd_kamar)->delete();
-        return response()->json(['success' => 'Item deleted successfully.']);
+        return response()->json(['message' => 'Kamar Berhasil Dihapus']);
     }
 }

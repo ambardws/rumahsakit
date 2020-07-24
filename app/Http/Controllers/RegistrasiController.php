@@ -34,6 +34,7 @@ class RegistrasiController extends Controller
         if ($request->ajax()) {
             $data = Registrasi::with('dokter', 'pasien', 'kamar');
             return DataTables::eloquent($data)
+                ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
 
@@ -86,7 +87,9 @@ class RegistrasiController extends Controller
         $kamar->save();
 
 
-        return response()->json(['success' => 'Item saved successfully.']);
+        return response()->json([
+            'message' => 'Registrasi Berhasil Disimpan'
+        ]);
     }
 
     /**
@@ -113,9 +116,9 @@ class RegistrasiController extends Controller
     public function destroy($kd_reg)
     {
         Registrasi::find($kd_reg)->delete();
-        $kamar = Kamar::findOrFail($kd_reg);
-        $kamar->jumlah_kasur += 1;
-        $kamar->save();
-        return response()->json(['success' => 'Item deleted successfully.']);
+        // $kamar = Kamar::findOrFail($kd_reg);
+        // $kamar->jumlah_kasur += 1;
+        // $kamar->save();
+        return response()->json(['message' => 'Registrasi Berhasil Dihapus']);
     }
 }
