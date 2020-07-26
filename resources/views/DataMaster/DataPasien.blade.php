@@ -114,7 +114,7 @@
                     </div>
                   </div>
                     <div class="col-sm-offset-2 col-sm-10">
-                     <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
+                     <button type="submit" class="btn btn-primary ml-1" id="saveBtn" value="create">Simpan
                      </button>
                     </div>
                 </form>
@@ -122,6 +122,7 @@
         </div>
     </div>
   </div>
+
 
 
 
@@ -159,6 +160,26 @@
           $('#ItemForm').trigger("reset");
           $('#ajaxModel').modal('show');
       });
+
+      // $('body').on('click', '.detailPasien', function () {
+      //     var Pasien_id = $(this).data("kd_pasien");
+
+      //     $.ajax({
+      //       url: "dataPasien"+'/'+Pasien_id,
+      //       type: "GET",
+
+      //       success:function(data) {
+      //         $('#modalHeading').html("Detail Data Pasien");
+      //         $('#modalMd').modal('show');
+      //           },
+      //       error:function(jQXHR, textStatus, errorThrown) {
+      //           console.log(jQXHR);
+      //           console.log(textStatus);
+      //           console.log(errorThrown);
+      //           }
+      //   }); 
+      // });
+
 
       $('body').on('click', '.editPasien', function () {
         var Pasien_id = $(this).data('kd_pasien');

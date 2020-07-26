@@ -35,7 +35,9 @@ class DokterController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editDokter">Edit</a>';
+                    $btn = '<a href="dataDokter/' . $row->kd_dokter . '" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailDokter">Detail</a>';
+
+                    $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editDokter">Edit</a>';
 
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteDokter">Delete</a>';
                     return $btn;
@@ -49,6 +51,21 @@ class DokterController extends Controller
     }
 
     /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return View
+     */
+    public function show($kd_dokter)
+    {
+
+        $dokter = Dokter::findOrFail($kd_dokter);
+        return view('DataMaster.DetailDokter', compact('dokter'));
+    }
+
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -58,6 +75,14 @@ class DokterController extends Controller
     public function store(Request $request)
 
     {
+        // $this->validate($request, [
+        //     'nama_dokter' => 'required',
+        //     'tempat_lahir' => 'required',
+        //     'tanggal_lahir' => 'required',
+        //     'alamat_dokter' => 'required',
+        //     'telepon' => 'required',
+        //     'spesialiasi_dokter' => 'required'
+        // ]);
 
         Dokter::updateOrCreate(
             ['kd_dokter' => $request->Dokter_id],

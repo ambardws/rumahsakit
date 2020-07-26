@@ -6,6 +6,7 @@ use App\Pasien;
 use App\Dokter;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\View;
 
 class PasienController extends Controller
 {
@@ -33,7 +34,7 @@ class PasienController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailPasien">Detail</a>';
+                    $btn = '<a href="dataPasien/' . $row->kd_pasien . '" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailPasien">Detail</a>';
 
                     $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editPasien">Edit</a>';
 
@@ -45,10 +46,30 @@ class PasienController extends Controller
                 ->make(true);
         }
 
+        // $pasien = Pasien::all();
+        // $dokter = Dokter::all(['kd_dokter', 'nama_dokter']);
+        // $kamar = Kamar::all(['kd_kamar', 'nama_kamar', 'jumlah_kasur']);
+
+        // return View::make('DataMaster.dataPasien', compact('pasien'));
+
 
         return view('DataMaster.DataPasien');
     }
 
+
+
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return View
+     */
+    public function show($kd_pasien)
+    {
+
+        $pasien = Pasien::findOrFail($kd_pasien);
+        return view('DataMaster.DetailPasien', compact('pasien'));
+    }
 
 
     /**
@@ -61,6 +82,20 @@ class PasienController extends Controller
     public function store(Request $request)
 
     {
+
+        // $this->validate($request, [
+        //     'nik' => 'required',
+        //     'nama_pasien' => 'required',
+        //     'jenis_kelamin' => 'required',
+        //     'tempat_lahir' => 'required',
+        //     'tanggal_lahir' => 'required',
+        //     'alamat_pasien' => 'required',
+        //     'telepon' => 'required',
+        //     'tinggi_badan' => 'required',
+        //     'berat_badan' => 'required',
+        //     'gol_darah' => 'required',
+        //     'keluhan' => 'required'
+        // ]);
 
         Pasien::updateOrCreate(
             ['kd_pasien' => $request->Pasien_id],

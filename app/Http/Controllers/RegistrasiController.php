@@ -9,6 +9,7 @@ use App\Pasien;
 use App\Dokter;
 use App\Registrasi;
 use Illuminate\Support\Facades\View;
+use Monolog\Registry;
 
 class RegistrasiController extends Controller
 {
@@ -36,7 +37,7 @@ class RegistrasiController extends Controller
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
+                    $btn = '<a href="dataRegistrasi/' . $row->kd_reg . '" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
 
                     $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_reg="' . $row->kd_reg . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editRegistrasi">Edit</a>';
 
@@ -46,13 +47,31 @@ class RegistrasiController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $pasien = Pasien::all(['kd_pasien', 'nama_pasien']);
-        $dokter = Dokter::all(['kd_dokter', 'nama_dokter']);
-        $kamar = Kamar::all(['kd_kamar', 'nama_kamar', 'jumlah_kasur']);
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
+        $kamar = Kamar::all();
 
         return View::make('Registrasi.DataRegistrasi', compact('pasien', 'dokter', 'kamar'));
         // return view('Registrasi.DataRegistrasi');
     }
+
+
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return View
+     */
+    public function show($kd_reg)
+    {
+
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
+        $kamar = Kamar::all();
+
+        return View::make('Registrasi.DataRegistrasi', compact('pasien', 'dokter', 'kamar'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -65,6 +84,13 @@ class RegistrasiController extends Controller
 
     {
 
+        // $this->validate($request, [
+        //     'kd_pasien'    => 'required',
+        //     'kd_dokter'    => 'required',
+        //     'kd_kamar'     => 'required'
+        // ]);
+
+
         Registrasi::updateOrCreate(
             ['kd_reg' => $request->Reg_id],
 
@@ -74,11 +100,6 @@ class RegistrasiController extends Controller
                 'kd_kamar' => $request->namakamar
             ]
         );
-        // $this->validate($request, [
-        //     'kd_pasien'    => 'required',
-        //     'kd_kamar'     => 'required',
-        //     'kd_dokter'    => 'required'
-        // ]);
 
         // Registrasi::create($request->all());
 

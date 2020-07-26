@@ -56,6 +56,7 @@ class KamarController extends Controller
 
     {
 
+
         Kamar::updateOrCreate(
             ['kd_kamar' => $request->Kamar_id],
 
@@ -65,6 +66,13 @@ class KamarController extends Controller
                 'jumlah_kasur' => $request->jumlahkasur
             ]
         );
+
+        // $this->validate($request, [
+        //     'nama_kamar'    => 'required',
+        //     'kelas'    => 'required',
+        //     'jumlah_kasur'     => 'required'
+        // ]);
+
 
 
         return response()->json(['message' => 'Kamar Berhasi Disimpan']);

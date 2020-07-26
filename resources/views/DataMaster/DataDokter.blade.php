@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
- <!-- DataTales Dokter -->
+ <!-- DataTales -->
  <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Data Dokter</h6>
@@ -16,10 +16,8 @@
             <th>Nama</th>
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
-            <th>Alamat</th>
-            <th>Telepon</th>
             <th>Spesialisasi</th>
-            <th width= "15%">Aksi</th>
+            <th width= "20%">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -28,9 +26,9 @@
     </div>
   </div>
 
-  <div class="modal fade" id="ajaxModel" aria-hidden="true">
+  <div class="modal bd-example-modal-lg fade" id="ajaxModel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modelHeading"></h4>
@@ -38,44 +36,49 @@
             <div class="modal-body">
                 <form id="DokterForm" name="DokterForm" class="form-horizontal">
                    <input type="hidden" name="Dokter_id" id="Dokter_id">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-5 control-label">Nama Dokter</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="" required="">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-5 control-label">Nama Dokter</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="" required="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-5 control-label">Tempat Lahir</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" placeholder="Masukkan Tempat Lahir" value=""  required="">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Tempat Lahir</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" placeholder="Masukkan Tempat Lahir" value=""  required="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-5 control-label">Tanggal Lahir</label>
-                      <div class="col-sm-12">
-                        <input type="date" class="form-control" id="tanggallahir" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value=""  required="">
+                        <div class="form-group">
+                          <label class="col-sm-5 control-label">Tanggal Lahir</label>
+                          <div class="col-sm-12">
+                            <input type="date" class="form-control" id="tanggallahir" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value=""  required="">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-5 control-label">Alamat Dokter</label>
+                          <div class="col-sm-12">
+                            <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value=""  required=""></textarea>
+                          </div>
+                        </div>
                       </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-5 control-label">Alamat Dokter</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value=""  required="">
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-5 control-label">Telepon</label>
-                  <div class="col-sm-12">
-                    <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Tempat Lahir" value=""  required="">
-                  </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-5 control-label">Spesialisasi</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="spesialiasi" name="spesialiasi" placeholder="Masukkan Spesialiasi" value=""  required="">
-                </div>
-            </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="col-sm-5 control-label">Telepon</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Tempat Lahir" value=""  required="">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-5 control-label">Spesialisasi</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="spesialiasi" name="spesialiasi" placeholder="Masukkan Spesialiasi" value=""  required="">
+                            </div>
+                          </div>
+                       </div>
                     <div class="col-sm-offset-2 col-sm-10">
-                     <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
+                     <button type="submit" class="btn btn-primary ml-2" id="saveBtn" value="create">Simpan
                      </button>
                     </div>
                 </form>
@@ -107,8 +110,6 @@
               {data: 'nama_dokter', name: 'nama_dokter'},
               {data: 'tempat_lahir', name: 'tempat_lahir'},
               {data: 'tanggal_lahir', name: 'tanggal_lahir'},
-              {data: 'alamat_dokter', name: 'alamat_dokter'},
-              {data: 'telepon', name: 'telepon'},
               {data: 'spesialiasi_dokter', name: 'spesialiasi_dokter'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
           ]

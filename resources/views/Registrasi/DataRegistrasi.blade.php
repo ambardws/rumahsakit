@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
- <!-- DataTales Pasien -->
+ <!-- DataTales -->
  <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Informasi Kamar</h6>
@@ -39,7 +39,7 @@
                       <div class="form-group">
                           <label for="name" class="col-sm-5 control-label">Nama Pasien</label>
                           <div class="col-sm-12">
-                            <select class="custom-select" id="namapasien" name="namapasien" aria-label="Example select with button addon">
+                            <select class="custom-select" id="namapasien" name="namapasien" aria-label="Example select with button addon" required>
                               <option selected>Pilih Pasien</option>
                               @foreach($pasien as $p)
                               <option value="<?= $p->kd_pasien ?>"> <?= $p->nama_pasien ?></option>
@@ -51,7 +51,7 @@
                       <div class="form-group">
                         <label for="name" class="col-sm-5 control-label">Nama Dokter</label>
                           <div class="col-sm-12">
-                            <select class="custom-select" id="namadokter" name="namadokter" aria-label="Example select with button addon">
+                            <select class="custom-select" id="namadokter" name="namadokter" aria-label="Example select with button addon" required>
                               <option selected>Pilih Dokter</option>
                               @foreach($dokter as $d)
                               <option value="<?= $d->kd_dokter ?>"> <?= $d->nama_dokter ?></option>
@@ -63,7 +63,7 @@
                       <div class="form-group">
                         <label for="name" class="col-sm-5 control-label">Nama Kamar</label>
                         <div class="col-sm-12">
-                          <select class="custom-select" id="namakamar" name="namakamar" aria-label="Example select with button addon">
+                          <select class="custom-select" id="namakamar" name="namakamar" aria-label="Example select with button addon" required>
                             <option selected>Pilih Kamar.</option>
                             @foreach($kamar as $k)
                             <option value="<?= $k->kd_kamar ?>"> <?= $k->nama_kamar ?></option>

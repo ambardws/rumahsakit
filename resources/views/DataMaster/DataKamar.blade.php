@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
- <!-- DataTales Dokter -->
+ <!-- DataTales  -->
  <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Data Kamar</h6>
@@ -102,7 +102,7 @@
       $('body').on('click', '.editKamar', function () {
         var Kamar_id = $(this).data('kd_kamar');
         $.get("{{ route('dataKamar.index') }}" +'/' + Kamar_id +'/edit', function (data) {
-            $('#modelHeading').html("Edit Data Dokter");
+            $('#modelHeading').html("Edit Data Kamar");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
             $('#Kamar_id').val(data.kd_kamar);
