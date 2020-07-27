@@ -99,7 +99,7 @@
           processing: true,
           serverSide: true,
   
-          ajax: "{{ route('dataRegistrasi.index') }}",
+          ajax: "{{ route('registrasi.index') }}",
           columns: [
               {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
               {data: 'pasien.nama_pasien', name: 'pasien.nama_pasien'},
@@ -120,7 +120,7 @@
 
       $('body').on('click', '.editRegistrasi', function () {
         var Reg_id = $(this).data('kd_reg');
-        $.get("{{ route('dataRegistrasi.index') }}" +'/' + Reg_id +'/edit', function (data) {
+        $.get("{{ route('registrasi.index') }}" +'/' + Reg_id +'/edit', function (data) {
             $('#modelHeading').html("Edit Data Regitrasi");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
@@ -142,7 +142,7 @@
 
         $.ajax({
           data: $('#PasienForm').serialize(),
-          url: "{{ route('dataRegistrasi.store') }}",
+          url: "{{ route('registrasi.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
@@ -182,7 +182,7 @@
         }).then(function(){
         $.ajax({
             type: "DELETE",
-            url: "{{ route('dataRegistrasi.store') }}"+'/'+Reg_id,
+            url: "{{ route('registrasi.store') }}"+'/'+Reg_id,
             success: function (data) {
                 table.draw();
                 swal({

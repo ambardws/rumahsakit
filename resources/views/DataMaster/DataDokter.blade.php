@@ -104,7 +104,7 @@
           processing: true,
           serverSide: true,
   
-          ajax: "{{ route('dataDokter.index') }}",
+          ajax: "{{ route('dokter.index') }}",
           columns: [
               {data: 'DT_RowIndex', name:'DT_RowIndex' },
               {data: 'nama_dokter', name: 'nama_dokter'},
@@ -125,7 +125,7 @@
 
       $('body').on('click', '.editDokter', function () {
         var Dokter_id = $(this).data('kd_dokter');
-        $.get("{{ route('dataDokter.index') }}" +'/' + Dokter_id +'/edit', function (data) {
+        $.get("{{ route('dokter.index') }}" +'/' + Dokter_id +'/edit', function (data) {
             $('#modelHeading').html("Edit Data Dokter");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
@@ -146,7 +146,7 @@
 
         $.ajax({
           data: $('#DokterForm').serialize(),
-          url: "{{ route('dataDokter.store') }}",
+          url: "{{ route('dokter.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
@@ -186,7 +186,7 @@
         }).then(function(){
         $.ajax({
             type: "DELETE",
-            url: "{{ route('dataDokter.store') }}"+'/'+Dokter_id,
+            url: "{{ route('dokter.store') }}"+'/'+Dokter_id,
             success: function (data) {
                 table.draw();
                 swal({

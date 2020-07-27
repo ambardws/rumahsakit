@@ -80,7 +80,7 @@
           processing: true,
           serverSide: true,
   
-          ajax: "{{ route('dataKamar.index') }}",
+          ajax: "{{ route('kamar.index') }}",
           columns: [
               {data: 'DT_RowIndex', name:'DT_RowIndex'},
               {data: 'nama_kamar', name: 'nama_kamar'},
@@ -101,7 +101,7 @@
 
       $('body').on('click', '.editKamar', function () {
         var Kamar_id = $(this).data('kd_kamar');
-        $.get("{{ route('dataKamar.index') }}" +'/' + Kamar_id +'/edit', function (data) {
+        $.get("{{ route('kamar.index') }}" +'/' + Kamar_id +'/edit', function (data) {
             $('#modelHeading').html("Edit Data Kamar");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
@@ -118,7 +118,7 @@
 
         $.ajax({
           data: $('#KamarForm').serialize(),
-          url: "{{ route('dataKamar.store') }}",
+          url: "{{ route('kamar.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
@@ -159,7 +159,7 @@
         }).then(function(){
         $.ajax({
             type: "DELETE",
-            url: "{{ route('dataKamar.store') }}"+'/'+Kamar_id,
+            url: "{{ route('kamar.store') }}"+'/'+Kamar_id,
             success: function (data) {
                 table.draw();
                 swal({

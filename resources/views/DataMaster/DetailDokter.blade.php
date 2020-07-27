@@ -7,7 +7,7 @@
  <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Detail Dokter <?= $dokter->nama_dokter ?></h6>
-    <a href="{{url('dataPasien')}}" class="btn btn-success btn-sm float-right">Kembali</a>
+    <a href="{{url('dokter')}}" class="btn btn-success btn-sm float-right">Kembali</a>
   </div>
   <div class="card-body">
       <div class="row">

@@ -141,7 +141,7 @@
           processing: true,
           serverSide: true,
   
-          ajax: "{{ route('dataPasien.index') }}",
+          ajax: "{{ route('pasien.index') }}",
           columns: [
               {data: 'DT_RowIndex', name:'DT_RowIndex' },
               {data: 'nama_pasien', name: 'nama_pasien'},
@@ -165,7 +165,7 @@
       //     var Pasien_id = $(this).data("kd_pasien");
 
       //     $.ajax({
-      //       url: "dataPasien"+'/'+Pasien_id,
+      //       url: "pasien"+'/'+Pasien_id,
       //       type: "GET",
 
       //       success:function(data) {
@@ -183,7 +183,7 @@
 
       $('body').on('click', '.editPasien', function () {
         var Pasien_id = $(this).data('kd_pasien');
-        $.get("{{ route('dataPasien.index') }}" +'/' + Pasien_id +'/edit', function (data) {
+        $.get("{{ route('pasien.index') }}" +'/' + Pasien_id +'/edit', function (data) {
             $('#modelHeading').html("Edit Data Pasien");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
@@ -213,7 +213,7 @@
 
         $.ajax({
           data: $('#PasienForm').serialize(),
-          url: "{{ route('dataPasien.store') }}",
+          url: "{{ route('pasien.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
@@ -253,7 +253,7 @@
         }).then(function(){
         $.ajax({
             type: "DELETE",
-            url: "{{ route('dataPasien.store') }}"+'/'+Pasien_id,
+            url: "{{ route('pasien.store') }}"+'/'+Pasien_id,
             success: function (data) {
                 table.draw();
                 swal({

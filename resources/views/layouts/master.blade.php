@@ -72,9 +72,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Data</h6>
-            <a class="collapse-item" href="{{url('dataPasien')}}">Data Pasien</a>
-            <a class="collapse-item" href="{{url('dataDokter')}}">Data Dokter</a>
-          <a class="collapse-item" href="{{url('dataKamar')}}">Data Kamar</a>
+            <a class="collapse-item" href="{{url('pasien')}}">Data Pasien</a>
+            <a class="collapse-item" href="{{url('dokter')}}">Data Dokter</a>
+          <a class="collapse-item" href="{{url('kamar')}}">Data Kamar</a>
           </div>
         </div>
       </li>
@@ -88,8 +88,8 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="{{ (Request::is('dataRegistrasi')) ? 'nav-item active' : 'nav-item' }}">
-        <a class="nav-link" href="{{url('dataRegistrasi')}}">
+      <li class="{{ (Request::is('registrasi')) ? 'nav-item active' : 'nav-item' }}">
+        <a class="nav-link" href="{{url('registrasi')}}">
           <i class="fas fa-fw fa-folder"></i>
           <span>Registrasi</span>
         </a>

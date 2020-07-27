@@ -20,10 +20,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('dataDokter', 'DokterController');
+Route::resource('dokter', 'DokterController');
+Route::get('/dokter/{kd_dokter}/detail', 'DokterController@show');
 
-Route::resource('dataPasien', 'PasienController');
+Route::resource('pasien', 'PasienController');
+Route::get('/pasien/{kd_pasien}/detail', 'PasienController@show');
 
-Route::resource('dataKamar', 'KamarController');
+Route::resource('kamar', 'KamarController');
 
-Route::resource('dataRegistrasi', 'RegistrasiController');
+Route::resource('registrasi', 'RegistrasiController');
