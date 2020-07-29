@@ -19,6 +19,8 @@ Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('callback/google', 'Auth\GoogleController@handleGoogleCallback');
 
 Route::resource('dokter', 'DokterController');
 Route::get('/dokter/{kd_dokter}/detail', 'DokterController@show');

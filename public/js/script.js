@@ -9,3 +9,14 @@ $('.count').each(function () {
         }
     });
 });
+
+
+var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+var dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"]
+
+var newDate = new Date();
+newDate.setDate(newDate.getDate());
+
+$('#datetime').html(dayNames[newDate.getDay()] + ", " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear())
