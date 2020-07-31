@@ -112,6 +112,10 @@
         })
      });
 
+     $('#ajaxModel').on('hidden.bs.modal', function () {
+        $(this).find("input,textarea,select").val('').end();  
+      });
+
 
       $('#saveBtn').click(function (e) {
         e.preventDefault();

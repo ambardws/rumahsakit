@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>RS. Ibnu Sina</title>
+  <title>SIKRS</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -42,7 +42,7 @@
         <div class="sidebar-brand-icon">
           <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">RS. Ibnu Sina</div>
+        <div class="sidebar-brand-text mx-3">SIKRS</div>
       </a>
 
       <!-- Divider -->

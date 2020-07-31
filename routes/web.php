@@ -31,3 +31,4 @@ Route::get('/pasien/{kd_pasien}/detail', 'PasienController@show');
 Route::resource('kamar', 'KamarController');
 
 Route::resource('registrasi', 'RegistrasiController');
+Route::get('/registrasi/{kd_reg}/detail', 'RegistrasiController@show');

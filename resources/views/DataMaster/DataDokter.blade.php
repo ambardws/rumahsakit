@@ -67,7 +67,7 @@
                           <div class="form-group">
                             <label class="col-sm-5 control-label">Telepon</label>
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Tempat Lahir" value=""  required="">
+                              <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Telepon" value=""  required="">
                             </div>
                           </div>
                           <div class="form-group">
@@ -139,7 +139,9 @@
         })
      });
 
-
+     $('#ajaxModel').on('hidden.bs.modal', function () {
+        $(this).find("input,textarea,select").val('').end();  
+      });
 
       $('#saveBtn').click(function (e) {
         e.preventDefault();

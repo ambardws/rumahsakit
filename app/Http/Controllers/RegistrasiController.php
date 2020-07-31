@@ -37,7 +37,7 @@ class RegistrasiController extends Controller
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="dataRegistrasi/' . $row->kd_reg . '" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
+                    $btn = '<a href="registrasi/' . $row->kd_reg . '/detail" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
 
                     $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_reg="' . $row->kd_reg . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editRegistrasi">Edit</a>';
 
@@ -65,11 +65,28 @@ class RegistrasiController extends Controller
     public function show($kd_reg)
     {
 
-        $pasien = Pasien::all();
-        $dokter = Dokter::all();
-        $kamar = Kamar::all();
+        $registrasi = Registrasi::find($kd_reg);
 
-        return View::make('Registrasi.DataRegistrasi', compact('pasien', 'dokter', 'kamar'));
+        $data = $registrasi->pasien()->get();
+        $data = $registrasi->kamar()->get();
+        $data = $registrasi->dokter()->get();
+
+        $data = [
+            'nama_pasien' => $registrasi->pasien->nama_pasien,
+            'tanggal_lahir' => $registrasi->pasien->tanggal_lahir,
+            'jenis_kelamin' => $registrasi->pasien->jenis_kelamin,
+            'alamat_pasien' => $registrasi->pasien->alamat_pasien,
+            'tinggi_badan' => $registrasi->pasien->tinggi_badan,
+            'berat_badan' => $registrasi->pasien->berat_badan,
+            'nama_dokter' => $registrasi->dokter->nama_dokter,
+            'nama_kamar' => $registrasi->kamar->nama_kamar,
+            'kelas' => $registrasi->kamar->kelas,
+            'keluhan' => $registrasi->pasien->keluhan
+        ];
+
+        $detail = (object) $data;
+
+        return view('Registrasi.DetailRegistrasi', compact('detail'));
     }
 
 
