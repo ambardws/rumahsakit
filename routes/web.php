@@ -30,5 +30,10 @@ Route::get('/pasien/{kd_pasien}/detail', 'PasienController@show');
 
 Route::resource('kamar', 'KamarController');
 
+Route::resource('tambahregistrasi', 'TambahRegistrasiController');
+
 Route::resource('registrasi', 'RegistrasiController');
 Route::get('/registrasi/{kd_reg}/detail', 'RegistrasiController@show');
+
+Route::get('change-password', 'ChangePasswordController@index');
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');

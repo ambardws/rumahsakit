@@ -177,7 +177,7 @@
       
       $('body').on('click', '.deleteDokter', function () {
         var Dokter_id = $(this).data("kd_dokter");
-        wal({
+        swal({
               title: 'Apa kamu yakin?',
               text: "Anda tidak akan dapat mengembalikan ini!",
               type: 'warning',

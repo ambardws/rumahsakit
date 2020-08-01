@@ -87,19 +87,33 @@
         TINDAKAN
       </div>
 
+
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('tambahregistrasi')}}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Registrasi</span></a>
+      </li>
+
+      
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="{{ (Request::is('registrasi')) ? 'nav-item active' : 'nav-item' }}">
         <a class="nav-link" href="{{url('registrasi')}}">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Registrasi</span>
+          <span>Log Registrasi</span>
         </a>
       </li>
 
-      <!-- Nav Item - Charts -->
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        AKUN
+      </div>
+
+      <!-- Ubah Password -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Log Registrasi</span></a>
+        <a class="nav-link" href="{{url('change-password')}}">
+          <i class="fas fa-fw fa fa-key"></i>
+          <span>Ubah Password</span></a>
       </li>
       
 
@@ -133,7 +147,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello, {{ Auth::user()->name }}</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello, {{ Auth::user()->name }}<i class="fa fa-user ml-2" aria-hidden="true"></i></span>
               </a>
               
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -156,6 +170,7 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+         @include('flash-message')
          @yield('content')
         </div>
         <!-- /.container-fluid -->
