@@ -118,9 +118,11 @@ class RegistrasiController extends Controller
             ]
         );
 
-        // Registrasi::create($request->all());
-
         $kamar = Kamar::findOrFail($request->namakamar);
+        // if ($kamar->kd_kamar == $request->namakamar) {
+        //     $kamar->save();
+        // }
+
         $kamar->jumlah_kasur -= 1;
         $kamar->save();
 
@@ -139,6 +141,7 @@ class RegistrasiController extends Controller
 
     public function edit($kd_reg)
     {
+
         $registrasi = Registrasi::find($kd_reg);
         return response()->json($registrasi);
     }
@@ -153,10 +156,13 @@ class RegistrasiController extends Controller
 
     public function destroy($kd_reg)
     {
+        $registrasi = Registrasi::find($kd_reg);
+
+        $kamar = $registrasi->kamar()->first();
+        $kamar->jumlah_kasur += 1;
+        $kamar->save();
+
         Registrasi::find($kd_reg)->delete();
-        // $kamar = Kamar::findOrFail($kd_reg);
-        // $kamar->jumlah_kasur += 1;
-        // $kamar->save();
         return response()->json(['message' => 'Registrasi Berhasil Dihapus']);
     }
 }

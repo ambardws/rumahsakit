@@ -4,7 +4,7 @@
  <!-- DataTales -->
  <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Informasi Registrasi Kamar Pasien</h6>
+    <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Informasi Registrasi Kamar</h6>
     <a href="javascript:void(0)" id="createNewItem" class="btn btn-success btn-sm float-right"> + Registrasi</a>
   </div>
   <div class="card-body">

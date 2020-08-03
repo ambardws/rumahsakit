@@ -22,6 +22,6 @@ class Kamar extends Model
 
     public function registrasi()
     {
-        return $this->hasMany(Registrasi::class);
+        return $this->hasMany(Registrasi::class, 'kd_reg', 'kd_reg');
     }
 }

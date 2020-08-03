@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Pasien;
+use App\Kamar;
+use App\Dokter;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
@@ -33,11 +35,8 @@ class TambahRegistrasiController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="pasien/' . $row->kd_pasien . '/detail" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailPasien">Detail</a>';
 
-                    $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editPasien">Edit</a>';
-
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Delete" class="btn btn-danger btn-sm deletePasien">Delete</a>';
+                    $btn  = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Pilih" class="edit btn btn-primary btn-sm tambahRegistrasi">Pilih</a>';
 
                     return $btn;
                 })
@@ -50,8 +49,9 @@ class TambahRegistrasiController extends Controller
         // $kamar = Kamar::all(['kd_kamar', 'nama_kamar', 'jumlah_kasur']);
 
         // return View::make('DataMaster.dataPasien', compact('pasien'));
+        $dokter = Dokter::all();
+        $kamar = Kamar::all();
 
-
-        return view('Registrasi.TambahRegistrasi');
+        return view('Registrasi.TambahRegistrasi', compact('dokter', 'kamar'));
     }
 }

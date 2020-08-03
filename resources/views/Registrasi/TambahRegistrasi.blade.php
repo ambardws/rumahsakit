@@ -26,94 +26,50 @@
     </div>
   </div>
 
-  <div class="modal fade bd-example-modal-lg" id="ajaxModel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-md" id="ajaxModel" aria-hidden="true">
 
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modelHeading"></h4>
             </div>
             <div class="modal-body">
                 <form id="PasienForm" name="PasienForm" class="form-horizontal">
-                   <input type="hidden" name="Pasien_id" id="Pasien_id">
-                   <div class="row">
-                     <div class="col-md-6">
+                   <input type="hidden" name="Reg_id" id="Reg_id">                   
                       <div class="form-group">
                           <label for="name" class="col-sm-5 control-label">Nama Pasien</label>
                           <div class="col-sm-12">
-                              <input type="text" class="form-control" id="namapasien" name="namapasien" placeholder="Masukkan Nama Pasien" value="" required="">
-                          </div>
-                      </div>
+                                <input type="text" class="form-control" id="namapasien" name="namapasien" placeholder="Masukkan Nama Pasien" value="" required="">
+                            </div>
+                        </div>
+                      </div>  
+                      
                       <div class="form-group">
-                        <label for="name" class="col-sm-5 control-label">NIK</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" value="" required="">
+                        <label for="name" class="col-sm-5 control-label">Nama Dokter</label>
+                          <div class="col-sm-12">
+                            <select class="custom-select" id="namadokter" name="namadokter" aria-label="Example select with button addon" required>
+                              <option selected>Pilih Dokter</option>
+                              @foreach($dokter as $d)
+                              <option value="<?= $d->kd_dokter ?>"> <?= $d->nama_dokter ?></option>
+                              @endforeach
+                            </select>
                         </div>
                       </div>
+
                       <div class="form-group">
-                        <label for="name" class="col-sm-5 control-label">Jenis Kelamin</label>
+                        <label for="name" class="col-sm-5 control-label">Nama Kamar</label>
                         <div class="col-sm-12">
-                          <select class="custom-select" id="jeniskelamin" name="jeniskelamin" aria-label="Example select with button addon">
-                            <option selected>Pilih...</option>
-                            <option value="Laki-Laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                          <select class="custom-select" id="namakamar" name="namakamar" aria-label="Example select with button addon" required>
+                            <option selected>Pilih Kamar.</option>
+                            @foreach($kamar as $k)
+                            <option value="<?= $k->kd_kamar ?>"> <?= $k->nama_kamar ?></option>
+                            @endforeach
                           </select>
                         </div>
-                      </div>
-                      <div class="form-group">
-                          <label class="col-sm-5 control-label">Tempat Lahir</label>
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" placeholder="Masukkan Tempat Lahir" value=""  required="">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Tanggal Lahir</label>
-                        <div class="col-sm-12">
-                            <input type="date" class="form-control" id="tanggallahir" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value=""  required="">
-                        </div>
-                      </div>                 
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Alamat Pasien</label>
-                        <div class="col-sm-12">
-                          <textarea class="form-control" id="alamatpasien" name="alamatpasien" placeholder="Masukkan Alamat" value=""  required=""></textarea>
-                        </div>
-                      </div>
+                      
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Telepon</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan No. Telepon" value=""  required="">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Tinggi Badan</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="tinggibadan" name="tinggibadan" placeholder="cm" value=""  required="">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Berat Badan</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="beratbadan" name="beratbadan" placeholder="kg" value=""  required="">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Golongan Darah</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="goldarah" name="goldarah" placeholder="Masukkan Gol Darah" value=""  required="">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Keluhan</label>
-                        <div class="col-sm-12">
-                          <textarea class="form-control" id="keluhan" name="keluhan" placeholder="Masukkan Keluhan" value=""  required=""></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                     <div class="col-sm-offset-2 col-sm-10">
-                     <button type="submit" class="btn btn-primary ml-1" id="saveBtn" value="create">Simpan
+                     <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
                      </button>
                     </div>
                 </form>
@@ -152,32 +108,19 @@
           ]
       });  
 
-      $('#createNewItem').click(function () {
-          $('#modelHeading').html("Tambah Data Pasien");
+
+      $('body').on('click', '.tambahRegistrasi', function () {
+        var Pasien_id = $(this).data("kd_pasien");
+        $.get("{{ route('pasien.index') }}" +'/' + Pasien_id, function(data) {
+          $('#modelHeading').html("Tambah Data registrasi");
           $('#saveBtn').val("create-Item");
           $('#Pasien_id').val('');
+          $('#namapasien').val(data.nama_pasien);
           $('#ItemForm').trigger("reset");
           $('#ajaxModel').modal('show');
+        })
       });
 
-      // $('body').on('click', '.detailPasien', function () {
-      //     var Pasien_id = $(this).data("kd_pasien");
-
-      //     $.ajax({
-      //       url: "pasien"+'/'+Pasien_id,
-      //       type: "GET",
-
-      //       success:function(data) {
-      //         $('#modalHeading').html("Detail Data Pasien");
-      //         $('#modalMd').modal('show');
-      //           },
-      //       error:function(jQXHR, textStatus, errorThrown) {
-      //           console.log(jQXHR);
-      //           console.log(textStatus);
-      //           console.log(errorThrown);
-      //           }
-      //   }); 
-      // });
 
 
       $('body').on('click', '.editPasien', function () {

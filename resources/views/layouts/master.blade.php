@@ -87,21 +87,19 @@
         TINDAKAN
       </div>
 
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="{{url('tambahregistrasi')}}">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Registrasi</span></a>
-      </li>
-
-      
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="{{ (Request::is('registrasi')) ? 'nav-item active' : 'nav-item' }}">
         <a class="nav-link" href="{{url('registrasi')}}">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Log Registrasi</span>
+          <span>Registrasi</span>
         </a>
+      </li>
+
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Log Registrasi</span></a>
       </li>
 
       <!-- Heading -->
@@ -170,7 +168,7 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-         @include('flash-message')
+        @include('flash-message')
          @yield('content')
         </div>
         <!-- /.container-fluid -->
