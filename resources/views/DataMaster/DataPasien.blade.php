@@ -17,7 +17,6 @@
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
             <th>Telepon</th>
-            <th>Keluhan</th>
             <th width= "20%">Aksi</th>
           </tr>
         </thead>
@@ -124,6 +123,97 @@
   </div>
 
 
+  {{-- Modal Detail Pasien --}}
+  <div class="modal fade bd-example-modal-lg" id="detailPasien" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="detailModalHeading"></h4>
+            </div>
+            <div class="modal-body">
+                   <div class="row">
+                     <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="name" class="col-sm-5 control-label">Nama Pasien</label>
+                          <div class="col-sm-12">
+                              <input type="text" class="form-control" id="nama_pasien" readonly>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="col-sm-5 control-label">NIK</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="NIK" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="col-sm-5 control-label">Jenis Kelamin</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="jenis_kelamin" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Tempat Lahir</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="tempat_lahir" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Tanggal Lahir</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="tanggal_lahir" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Alamat</label>
+                        <div class="col-sm-12">
+                          <textarea class="form-control" id="alamat_pasien" readonly></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Telepon</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="telepon_pasien" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Tinggi Badan</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="tinggi_badan" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Berat Badan</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="berat_badan" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Golongan Darah</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="golongan_darah" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Keluhan</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="keluhan_pasien" readonly>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
 
 
 
@@ -148,7 +238,6 @@
               {data: 'tempat_lahir', name: 'tempat_lahir'},
               {data: 'tanggal_lahir', name: 'tanggal_lahir'},
               {data: 'telepon', name: 'telepon'},
-              {data: 'keluhan', name: 'keluhan'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
           ]
       });  
@@ -161,24 +250,29 @@
           $('#ajaxModel').modal('show');
       });
 
-      // $('body').on('click', '.detailPasien', function () {
-      //     var Pasien_id = $(this).data("kd_pasien");
+      $('body').on('click', '.detailPasien', function () {
+        var Pasien_id = $(this).data('kd_pasien');
+        $.ajax({
+            type: "GET",
+            url: 'pasien/'+Pasien_id,
+            success: function (data) {
+            $('#detailModalHeading').html("Detail Data Pasien");
+            $('#detailPasien').modal('show');
+            $('#nama_pasien').val(data.nama_pasien);
+            $('#NIK').val(data.nik);
+            $('#jenis_kelamin').val(data.jenis_kelamin);
+            $('#tempat_lahir').val(data.tempat_lahir);
+            $('#tanggal_lahir').val(data.tanggal_lahir);
+            $('#alamat_pasien').val(data.alamat_pasien);
+            $('#telepon_pasien').val(data.telepon);
+            $('#tinggi_badan').val(data.tinggi_badan);
+            $('#berat_badan').val(data.berat_badan);
+            $('#golongan_darah').val(data.gol_darah);
+            $('#keluhan_pasien').val(data.keluhan);
+            },
+        })
+      })
 
-      //     $.ajax({
-      //       url: "pasien"+'/'+Pasien_id,
-      //       type: "GET",
-
-      //       success:function(data) {
-      //         $('#modalHeading').html("Detail Data Pasien");
-      //         $('#modalMd').modal('show');
-      //           },
-      //       error:function(jQXHR, textStatus, errorThrown) {
-      //           console.log(jQXHR);
-      //           console.log(textStatus);
-      //           console.log(errorThrown);
-      //           }
-      //   }); 
-      // });
 
 
       $('body').on('click', '.editPasien', function () {

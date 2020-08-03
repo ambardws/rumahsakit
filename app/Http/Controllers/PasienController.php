@@ -34,7 +34,7 @@ class PasienController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="pasien/' . $row->kd_pasien . '/detail" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailPasien">Detail</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailPasien">Detail</a>';
 
                     $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_pasien="' . $row->kd_pasien . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editPasien">Edit</a>';
 
@@ -68,7 +68,7 @@ class PasienController extends Controller
     {
 
         $pasien = Pasien::findOrFail($kd_pasien);
-        return view('DataMaster.DetailPasien', compact('pasien'));
+        return response()->json($pasien);
     }
 
 

@@ -38,7 +38,7 @@
                    <input type="hidden" name="Reg_id" id="Reg_id">                   
                       <div class="form-group">
                           <label for="name" class="col-sm-5 control-label">Nama Pasien</label>
-                          <div class="col-sm-12">
+                          <div class="col-sm-12">                   
                             <select class="custom-select" id="namapasien" name="namapasien" aria-label="Example select with button addon" required>
                               <option selected>Pilih Pasien</option>
                               @foreach($pasien as $p)
@@ -70,7 +70,6 @@
                             @endforeach
                           </select>
                         </div>
-                      
                     </div>
                     <div class="col-sm-offset-2 col-sm-10">
                      <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
@@ -81,6 +80,87 @@
         </div>
     </div>
   </div>
+
+
+
+  {{-- Modal Detail Registrasi --}}
+  <div class="modal fade bd-example-modal-lg" id="detailRegistrasi" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="detailModalHeading"></h4>
+            </div>
+            <div class="modal-body">
+                   <div class="row">
+                     <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="name" class="col-sm-5 control-label">Nama Pasien</label>
+                          <div class="col-sm-12">
+                              <input type="text" class="form-control" id="nama_pasien" readonly>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="col-sm-5 control-label">Jenis Kelamin</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="jeniskelamin" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Alamat Pasien</label>
+                        <div class="col-sm-12">
+                          <textarea class="form-control" id="alamatpasien" readonly></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Tinggi Badan</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="tinggibadan" readonly>
+                        </div>
+                      </div>          
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Berat Badan</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="beratbadan" readonly>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Dokter Jaga</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="nama_dokter" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Kamar</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="nama_kamar" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Kelas</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="kelas" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label">Keluhan</label>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" id="keluhan" readonly>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+
 
 
 
@@ -117,6 +197,29 @@
           $('#ItemForm').trigger("reset");
           $('#ajaxModel').modal('show');
       });
+
+      $('body').on('click', '.detailRegitrasi', function () {
+        var Reg_id = $(this).data('kd_reg');
+        $.ajax({
+            type: "GET",
+            url: 'registrasi/'+Reg_id,
+            success: function (data) {
+            $('#detailModalHeading').html("Detail Data Registrasi");
+            $('#detailRegistrasi').modal('show');
+            $('#Reg_id').val(data.kd_reg);
+            $('#nama_pasien').val(data.nama_pasien);
+            $('#tanggalahir').val(data.tanggal_lahir);
+            $('#jeniskelamin').val(data.jenis_kelamin);
+            $('#alamatpasien').val(data.alamat_pasien);
+            $('#tinggibadan').val(data.tinggi_badan);
+            $('#beratbadan').val(data.berat_badan);
+            $('#nama_dokter').val(data.nama_dokter);
+            $('#nama_kamar').val(data.nama_kamar);
+            $('#keluhan').val(data.keluhan);
+            $('#kelas').val(data.kelas);
+            },
+        })
+      })
 
       $('body').on('click', '.editRegistrasi', function () {
         var Reg_id = $(this).data('kd_reg');

@@ -37,7 +37,7 @@ class RegistrasiController extends Controller
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="registrasi/' . $row->kd_reg . '/detail" data-toggle="tooltip"  data-kd-_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_reg="' . $row->kd_reg . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailRegitrasi">Detail</a>';
 
                     $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_reg="' . $row->kd_reg . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editRegistrasi">Edit</a>';
 
@@ -85,8 +85,7 @@ class RegistrasiController extends Controller
         ];
 
         $detail = (object) $data;
-
-        return view('Registrasi.DetailRegistrasi', compact('detail'));
+        return response()->json($detail);
     }
 
 

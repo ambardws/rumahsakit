@@ -35,7 +35,7 @@ class DokterController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="dokter/' . $row->kd_dokter . '/detail" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailDokter">Detail</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailDokter">Detail</a>';
 
                     $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editDokter">Edit</a>';
 
@@ -60,7 +60,7 @@ class DokterController extends Controller
     {
 
         $dokter = Dokter::findOrFail($kd_dokter);
-        return view('DataMaster.DetailDokter', compact('dokter'));
+        return response()->json($dokter);
     }
 
 
