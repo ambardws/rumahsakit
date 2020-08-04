@@ -7,6 +7,7 @@ use App\Dokter;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\View;
+use Laravolt\Indonesia\Models\Province;
 
 class PasienController extends Controller
 {
@@ -52,8 +53,8 @@ class PasienController extends Controller
 
         // return View::make('DataMaster.dataPasien', compact('pasien'));
 
-
-        return view('DataMaster.DataPasien');
+        $provinsi = Province::pluck('name', 'id');
+        return view('DataMaster.DataPasien', compact('provinsi'));
     }
 
 

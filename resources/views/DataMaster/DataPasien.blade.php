@@ -63,7 +63,16 @@
                       <div class="form-group">
                           <label class="col-sm-5 control-label">Tempat Lahir</label>
                           <div class="col-sm-12">
-                            <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" placeholder="Masukkan Tempat Lahir" value=""  required="">
+                            <select class="custom-select" id="provinsi" aria-label="Example select with button addon">
+                              <option selected>Pilih Provinsi</option>
+                              @foreach($provinsi as $id => $name)
+                              <option value="{{$id}}"> {{$name}}</option>
+                              @endforeach
+                            </select>
+                            <select class="custom-select mt-3" id="tempatlahir" name="tempatlahir" aria-label="Example select with button addon">
+                              <option selected>Pilih Kota</option>
+                              
+                            </select>
                           </div>
                       </div>
                       <div class="form-group">
@@ -366,6 +375,21 @@
             }
         });
       });
+    });
+
+    $('#provinsi').on('change', function () {
+        $.ajax({
+            url: '{{ route('dependent-dropdown.store') }}',
+            method: 'POST',
+            data: {id: $(this).val()},
+            success: function (response) {
+                $('#tempatlahir').empty();
+
+                $.each(response, function (id, name) {
+                    $('#tempatlahir').append(new Option(name, name))
+                })
+            }
+        })
     });
 
   });

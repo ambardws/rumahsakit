@@ -8,6 +8,8 @@ use App\Spesialisasi;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Laravolt\Indonesia\Models\Province;
+use Laravolt\Indonesia\Models\City;
+
 
 class DokterController extends Controller
 
@@ -57,9 +59,21 @@ class DokterController extends Controller
      */
     public function show($kd_dokter)
     {
-
         $dokter = Dokter::findOrFail($kd_dokter);
-        return response()->json($dokter);
+
+        $data = $dokter->spesialisasi()->get();
+        $data = [
+            'nama_dokter' => $dokter->nama_dokter,
+            'nama_spesialisasi' => $dokter->spesialisasi->nama_spesialisasi,
+            'tempat_lahir' => $dokter->tempat_lahir,
+            'tanggal_lahir' => $dokter->tanggal_lahir,
+            'alamat_dokter' => $dokter->alamat_dokter,
+            'telepon' => $dokter->telepon
+
+        ];
+
+        $detail = (object) $data;
+        return response()->json($detail);
     }
 
 
@@ -96,8 +110,20 @@ class DokterController extends Controller
             ]
         );
 
+        $kota = City::where('province_id', $request->get('id'))
+            ->pluck('name', 'id');
 
-        return response()->json(['message' => 'Dokter Berhasil Disimpan']);
+        return response()->json($kota);
+
+        return response()->json($kota);
+    }
+
+    public function kota(Request $request)
+    {
+        $kota = City::where('province_id', $request->get('id'))
+            ->pluck('name', 'id');
+
+        return response()->json($kota);
     }
 
     /**

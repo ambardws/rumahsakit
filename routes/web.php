@@ -25,6 +25,7 @@ Route::get('callback/google', 'Auth\GoogleController@handleGoogleCallback');
 Route::resource('dokter', 'DokterController');
 Route::get('/dokter/{kd_dokter}/detail', 'DokterController@show');
 
+
 Route::resource('pasien', 'PasienController');
 Route::get('/pasien/{kd_pasien}/detail', 'PasienController@show');
 
@@ -35,5 +36,9 @@ Route::resource('tambahregistrasi', 'TambahRegistrasiController');
 Route::resource('registrasi', 'RegistrasiController');
 Route::get('/registrasi/{kd_reg}/detail', 'RegistrasiController@show');
 
+
 Route::get('change-password', 'ChangePasswordController@index');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
+Route::post('dependent-dropdown', 'DependentDropdownController@store')
+    ->name('dependent-dropdown.store');
