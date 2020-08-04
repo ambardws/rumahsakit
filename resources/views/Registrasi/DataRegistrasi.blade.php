@@ -5,7 +5,6 @@
  <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary float-left mt-1">Informasi Registrasi Kamar</h6>
-    <a href="javascript:void(0)" id="createNewItem" class="btn btn-success btn-sm float-right"> + Registrasi</a>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -39,12 +38,13 @@
                       <div class="form-group">
                           <label for="name" class="col-sm-5 control-label">Nama Pasien</label>
                           <div class="col-sm-12">                   
-                            <select class="custom-select" id="namapasien" name="namapasien" aria-label="Example select with button addon" required>
+                            <select class="custom-select" id="namapasien"  aria-label="Example select with button addon">
                               <option selected>Pilih Pasien</option>
                               @foreach($pasien as $p)
                               <option value="<?= $p->kd_pasien ?>"> <?= $p->nama_pasien ?></option>
                               @endforeach
                             </select>
+                            <input type="hidden" name="namapasien" id="kodepasien"> 
                         </div>
                       </div>  
                       
@@ -190,14 +190,6 @@
           ]
       });  
 
-      $('#createNewItem').click(function () {
-          $('#modelHeading').html("Tambah Data Registrasi");
-          $('#saveBtn').val("create-Item");
-          $('#Reg_id').val('');
-          $('#ItemForm').trigger("reset");
-          $('#ajaxModel').modal('show');
-      });
-
       $('body').on('click', '.detailRegitrasi', function () {
         var Reg_id = $(this).data('kd_reg');
         $.ajax({
@@ -228,7 +220,10 @@
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
             $('#Reg_id').val(data.kd_reg);
-            $('#namapasien').val(data.kd_pasien);
+            $('#kodepasien').val(data.kd_pasien)
+            $('#namapasien').val(data.kd_pasien)
+            $("#namapasien").attr('disabled', true);
+            // $('input').removeAttr('disabled');
             $('#namadokter').val(data.kd_dokter);
             $('#namakamar').val(data.kd_kamar);
         })

@@ -87,20 +87,22 @@
         TINDAKAN
       </div>
 
+      <!-- Tambah Registrasi -->
+      <li class="{{ (Request::is('tambahregistrasi')) ? 'nav-item active' : 'nav-item' }}">
+        <a class="nav-link" href="{{url('tambahregistrasi')}}">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Registrasi</span></a>
+      </li>
+
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="{{ (Request::is('registrasi')) ? 'nav-item active' : 'nav-item' }}">
-        <a class="nav-link" href="{{url('registrasi')}}">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Registrasi</span>
+        <a class="nav-link" href="{{url('registrasi')}}"> 
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Log Registrasi</span>
         </a>
       </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Log Registrasi</span></a>
-      </li>
+   
 
       <!-- Heading -->
       <div class="sidebar-heading">

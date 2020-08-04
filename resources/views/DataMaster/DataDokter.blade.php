@@ -182,7 +182,7 @@
           $('#modelHeading').html("Tambah Data Dokter");
           $('#saveBtn').val("create-Item");
           $('#Pasien_id').val('');
-          $('#ItemForm').trigger("reset");
+          $('#DokterForm').trigger("reset");
           $('#ajaxModel').modal('show');
       });
 

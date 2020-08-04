@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Monolog\Registry;
 
 class Kamar extends Model
 {

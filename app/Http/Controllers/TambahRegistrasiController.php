@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Pasien;
 use App\Kamar;
 use App\Dokter;
+use App\Registrasi;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TambahRegistrasiController extends Controller
 {
@@ -44,14 +46,63 @@ class TambahRegistrasiController extends Controller
                 ->make(true);
         }
 
-        // $pasien = Pasien::all();
-        // $dokter = Dokter::all(['kd_dokter', 'nama_dokter']);
-        // $kamar = Kamar::all(['kd_kamar', 'nama_kamar', 'jumlah_kasur']);
-
-        // return View::make('DataMaster.dataPasien', compact('pasien'));
         $dokter = Dokter::all();
         $kamar = Kamar::all();
 
         return view('Registrasi.TambahRegistrasi', compact('dokter', 'kamar'));
+    }
+
+
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return View
+     */
+    public function show($kd_reg)
+    {
+
+        $registrasi = Registrasi::find($kd_reg);
+
+        $data = $registrasi->pasien()->get();
+
+        $data = [
+            'kd_pasien' => $registrasi->pasien->kd_pasien,
+            'nama_pasien' => $registrasi->pasien->nama_pasien,
+        ];
+
+        $pasien = (object) $data;
+        return response()->json($pasien);
+    }
+
+
+    public function store(Request $request)
+
+    {
+
+        // $this->validate($request, [
+        //     'kd_pasien'    => 'required',
+        //     'kd_dokter'    => 'required',
+        //     'kd_kamar'     => 'required'
+        // ]);
+
+
+        Registrasi::updateOrCreate(
+            ['kd_reg' => $request->Reg_id],
+
+            [
+                'kd_pasien' => $request->kodepasien,
+                'kd_dokter' => $request->namadokter,
+                'kd_kamar' => $request->namakamar
+            ]
+        );
+
+        $kamar = Kamar::findOrFail($request->namakamar);
+        $kamar->jumlah_kasur -= 1;
+        $kamar->save();
+
+        return response()->json([
+            'message' => 'Registrasi Berhasil Disimpan'
+        ]);
     }
 }

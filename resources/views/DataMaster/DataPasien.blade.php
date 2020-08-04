@@ -246,7 +246,7 @@
           $('#modelHeading').html("Tambah Data Pasien");
           $('#saveBtn').val("create-Item");
           $('#Pasien_id').val('');
-          $('#ItemForm').trigger("reset");
+          $('#PasienForm').trigger("reset");
           $('#ajaxModel').modal('show');
       });
 

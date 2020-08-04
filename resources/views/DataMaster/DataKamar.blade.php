@@ -95,7 +95,7 @@
           $('#saveBtn').val("create-Item");
           $('#Kamar_id').val('');
           $('#namakamar').html('');
-          $('#ItemForm').trigger("reset");
+          $('#KamarForm').trigger("reset");
           $('#ajaxModel').modal('show');
       });
 
