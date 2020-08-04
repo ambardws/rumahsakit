@@ -14,11 +14,11 @@
             <th>No</th>
             <th>Nama</th>
             <th>NIK</th>
-            <th>Jenis Kelamin</th>
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
             <th>Telepon</th>
-            <th>Aksi</th>
+            <th>Keluhan</th>
+            <th width= "20%">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -107,10 +107,10 @@
               {data: 'DT_RowIndex', name:'DT_RowIndex' },
               {data: 'nama_pasien', name: 'nama_pasien'},
               {data: 'nik', name: 'nik'},
-              {data: 'jenis_kelamin', name: 'jenis_kelamin'},
               {data: 'tempat_lahir', name: 'tempat_lahir'},
               {data: 'tanggal_lahir', name: 'tanggal_lahir'},
               {data: 'telepon', name: 'telepon'},
+              {data: 'keluhan', name: 'keluhan'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
           ]
       });  
@@ -127,7 +127,6 @@
           $('#Reg_id').val('');
           $('#kodepasien').val(data.kd_pasien);
           $('#namapasien').val(data.nama_pasien);
-          $('#RegistrasiForm').trigger("reset");
           $('#ajaxModel').modal('show');
           },
         })
@@ -153,7 +152,6 @@
           success: function (data) {
               $('RegistrasiForm').trigger("reset");
               $('#ajaxModel').modal('hide');
-              window.location.href = "registrasi";
               table.draw();
               swal({
                     title: 'Success!',

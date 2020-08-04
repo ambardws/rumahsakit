@@ -4,35 +4,33 @@ namespace App\Http\Controllers;
 
 
 use App\Dokter;
+use App\Spesialisasi;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
+use Laravolt\Indonesia\Models\Province;
 
 class DokterController extends Controller
 
 {
 
-    /**
-
-     * Display a listing of the resource.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
 
     {
 
         if ($request->ajax()) {
-            $data = Dokter::latest()->get();
-            return DataTables::of($data)
+            $data = Dokter::with('spesialisasi');
+            return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-kd_dokter="' . $row->kd_dokter . '" data-original-title="Detail" class="mr-1 btn btn-success btn-sm detailDokter">Detail</a>';
@@ -45,9 +43,10 @@ class DokterController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $provinsi = Province::pluck('name', 'id');
+        $spesialisasi = Spesialisasi::all();
 
-
-        return view('DataMaster.DataDokter');
+        return view('DataMaster.DataDokter', compact('spesialisasi', 'provinsi'));
     }
 
     /**
@@ -93,7 +92,7 @@ class DokterController extends Controller
                 'tanggal_lahir' => $request->tanggallahir,
                 'alamat_dokter' => $request->alamat,
                 'telepon' => $request->telepon,
-                'spesialiasi_dokter' => $request->spesialiasi
+                'spesialisasi_id' => $request->spesialisasi
             ]
         );
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Dokter extends Model
 {
     public $table = "dokter";
@@ -11,8 +12,13 @@ class Dokter extends Model
     protected $primaryKey = 'kd_dokter';
 
     protected $fillable = [
-        'nama_dokter', 'tempat_lahir', 'tanggal_lahir', 'alamat_dokter', 'telepon', 'spesialiasi_dokter'
+        'nama_dokter', 'tempat_lahir', 'tanggal_lahir', 'alamat_dokter', 'telepon', 'spesialisasi_id'
     ];
+
+    public function spesialisasi()
+    {
+        return $this->belongsTo(Spesialisasi::class, 'spesialisasi_id', 'kd_spesialisasi');
+    }
 
     public function registrasi()
     {

@@ -47,7 +47,12 @@
                       <div class="form-group">
                         <label for="name" class="col-sm-5 control-label">Tempat Lahir</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" placeholder="Masukkan Tempat Lahir" value="" required="">
+                          <select class="custom-select" id="tempatlahir" name="tempatlahir" aria-label="Example select with button addon">
+                            <option selected>Pilih Tempat Lahir</option>
+                            @foreach($provinsi as $id => $name)
+                            <option value="<?= $id "> <?= $name ?></option>
+                            @endforeach
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
@@ -73,7 +78,12 @@
                       <div class="form-group">
                         <label class="col-sm-5 control-label">Spesialisasi</label>
                         <div class="col-sm-12">
-                          <input type="text" class="form-control" id="spesialiasi" name="spesialiasi" placeholder="Masukkan Spesialisasi" value=""  required="">
+                          <select class="custom-select" id="spesialisasi" name="spesialisasi" aria-label="Example select with button addon">
+                            <option selected>Pilih Spesialisasi</option>
+                            @foreach($spesialisasi as $s)
+                            <option value="<?= $s->kd_spesialisasi ?>"> <?= $s->nama_spesialisasi ?></option>
+                            @endforeach
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -169,11 +179,11 @@
   
           ajax: "{{ route('dokter.index') }}",
           columns: [
-              {data: 'DT_RowIndex', name:'DT_RowIndex' },
+            {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
               {data: 'nama_dokter', name: 'nama_dokter'},
               {data: 'tempat_lahir', name: 'tempat_lahir'},
               {data: 'tanggal_lahir', name: 'tanggal_lahir'},
-              {data: 'spesialiasi_dokter', name: 'spesialiasi_dokter'},
+              {data: 'spesialisasi.nama_spesialisasi', name: 'spesialisasi.nama_spesialisasi'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
           ]
       }); 
@@ -218,7 +228,7 @@
             $('#tanggallahir').val(data.tanggal_lahir);
             $('#alamat').val(data.alamat_dokter);
             $('#telepon').val(data.telepon);
-            $('#spesialiasi').val(data.spesialiasi_dokter);
+            $('#spesialisasi').val(data.spesialisasi_id);
         })
      });
 

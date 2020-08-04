@@ -16,11 +16,12 @@ class CreateDoktersTable extends Migration
         Schema::create('dokter', function (Blueprint $table) {
             $table->increments('kd_dokter');
             $table->string('nama_dokter', 50);
-            $table->string('tempat_lahir', 20);
+            $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('alamat_dokter', 100);
             $table->string('telepon', 15);
-            $table->string('spesialiasi_dokter', 20);
+            $table->integer('spesialisasi_id')->unsigned();
+            $table->foreign('spesialisasi_id')->references('kd_spesialisasi')->on('spesialisasi')->onDelete('cascade');
             $table->timestamps();
         });
     }
