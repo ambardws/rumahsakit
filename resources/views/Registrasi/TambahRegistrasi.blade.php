@@ -66,9 +66,9 @@
                         <label for="name" class="col-sm-5 control-label">Nama Kamar</label>
                         <div class="col-sm-12">
                           <select class="custom-select" id="namakamar" name="namakamar" aria-label="Example select with button addon" required>
-                            <option selected>Pilih Kamar.</option>
+                            <option selected>Pilih Kamar</option>
                             @foreach($kamar as $k)
-                            <option value="<?= $k->kd_kamar ?>"> <?= $k->nama_kamar ?></option>
+                            <option value="<?= $k->kd_kamar ?>"> <?= $k->nama_kamar ?> No. <?= $k->nomor ?></option>
                             @endforeach
                           </select>
                         </div>
@@ -153,11 +153,20 @@
               $('RegistrasiForm').trigger("reset");
               $('#ajaxModel').modal('hide');
               table.draw();
-              swal({
+              if(data.status == '200' ){
+                swal({
                     title: 'Success!',
                     text: data.message,
                     type: 'success'
                   })
+              } else {
+                swal({
+                    title: 'Error',
+                    text: data.message,
+                    type: 'error'
+                  })
+              }
+              
           },
 
           error: function (data) {
@@ -173,7 +182,6 @@
       });
 
       
-     
 
   });
  

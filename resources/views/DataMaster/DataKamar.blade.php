@@ -13,10 +13,11 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama</th>
+            <th>Nama Kamar</th>
+            <th>Nomor Kamar</th>
             <th>Kelas</th>
             <th>Jumlah Kasur</th>
-            <th>Aksi</th>
+            <th width= "15%">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -38,9 +39,20 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-5 control-label">Nama Kamar</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="namakamar" name="namakamar" placeholder="Masukkan Nama Kamar" value="" required="">
+                          <select class="custom-select" id="kamar" name="kamar" aria-label="Example select with button addon">
+                            <option selected>Pilih Kamar</option>
+                            <option value="Mawar">Mawar</option>
+                            <option value="Melati">Melati</option>
+                            <option value="Raflesia">Raflesia</option>
+                          </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Nomor Kamar</label>
+                      <div class="col-sm-12">
+                        <input type="number" class="form-control" id="nomor" name="nomor" placeholder="Masukkan Nomor" value=""  required="">
+                      </div>
+                  </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">Kelas</label>
                         <div class="col-sm-12">
@@ -84,6 +96,7 @@
           columns: [
               {data: 'DT_RowIndex', name:'DT_RowIndex'},
               {data: 'nama_kamar', name: 'nama_kamar'},
+              {data: 'nomor', name: 'nomor'},
               {data: 'kelas', name: 'kelas'},
               {data: 'jumlah_kasur', name: 'jumlah_kasur'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -106,7 +119,8 @@
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
             $('#Kamar_id').val(data.kd_kamar);
-            $('#namakamar').val(data.nama_kamar);
+            $('#kamar').val(data.nama_kamar);
+            $('#nomor').val(data.nomor);
             $('#kelas').val(data.kelas);
             $('#jumlahkasur').val(data.jumlah_kasur);
         })

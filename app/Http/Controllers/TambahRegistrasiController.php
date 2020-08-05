@@ -9,6 +9,7 @@ use App\Registrasi;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class TambahRegistrasiController extends Controller
@@ -86,23 +87,34 @@ class TambahRegistrasiController extends Controller
         //     'kd_kamar'     => 'required'
         // ]);
 
+        $msg = '';
+        $status = '';
+        $register = DB::table('registrasi_kamar')->where('kd_kamar', $request->namakamar)->first();
 
-        Registrasi::updateOrCreate(
-            ['kd_reg' => $request->Reg_id],
+        if (is_null($register)) {
+            $register = Registrasi::updateOrCreate(
+                ['kd_reg' => $request->Reg_id],
 
-            [
-                'kd_pasien' => $request->kodepasien,
-                'kd_dokter' => $request->namadokter,
-                'kd_kamar' => $request->namakamar
-            ]
-        );
+                [
+                    'kd_pasien' => $request->kodepasien,
+                    'kd_dokter' => $request->namadokter,
+                    'kd_kamar' => $request->namakamar
+                ]
+            );
 
-        $kamar = Kamar::findOrFail($request->namakamar);
-        $kamar->jumlah_kasur -= 1;
-        $kamar->save();
+            $kamar = Kamar::findOrFail($request->namakamar);
+            $kamar->jumlah_kasur -= 1;
+            $kamar->save();
 
+            $msg = 'Registrasi Berhasil Disimpan';
+            $status = '200';
+        } else {
+            $msg = 'Kamar Sudah Terisi';
+            $status = '500';
+        }
         return response()->json([
-            'message' => 'Registrasi Berhasil Disimpan'
+            'message' => $msg,
+            'status' => $status
         ]);
     }
 }

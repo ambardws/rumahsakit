@@ -16,6 +16,7 @@
             <th>Tanggal Lahir</th>
             <th>Dokter</th>
             <th>Kamar</th>
+            <th>No Kamar</th>
             <th width= "20%">Aksi</th>
           </tr>
         </thead>
@@ -66,7 +67,7 @@
                           <select class="custom-select" id="namakamar" name="namakamar" aria-label="Example select with button addon" required>
                             <option selected>Pilih Kamar.</option>
                             @foreach($kamar as $k)
-                            <option value="<?= $k->kd_kamar ?>"> <?= $k->nama_kamar ?></option>
+                            <option value="<?= $k->kd_kamar ?>"> <?= $k->nama_kamar ?> No. <?= $k->nomor ?></option>
                             @endforeach
                           </select>
                         </div>
@@ -186,6 +187,7 @@
               {data: 'pasien.tanggal_lahir', name: 'pasien.tanggal_lahir'},
               {data: 'dokter.nama_dokter', name: 'dokter.nama_dokter'},
               {data: 'kamar.nama_kamar', name: 'kamar.nama_kamar'},
+              {data: 'kamar.nomor', name: 'kamar.nomor'},
               {data: 'action', name: 'action', orderable: false, searchable: false}
           ]
       });  

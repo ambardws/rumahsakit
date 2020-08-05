@@ -11,12 +11,12 @@ class Kamar extends Model
     protected $primaryKey = 'kd_kamar';
 
     protected $fillable = [
-        'nama_kamar', 'kelas', 'jumlah_kasur'
+        'nama_kamar', 'nomor', 'kelas', 'jumlah_kasur'
     ];
 
     public function pasien()
     {
-        return $this->hasMany(Pasien::class);
+        return $this->belongsTo(Pasien::class);
     }
 
     public function registrasi()

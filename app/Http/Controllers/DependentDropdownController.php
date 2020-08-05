@@ -8,13 +8,6 @@ use Laravolt\Indonesia\Models\City;
 
 class DependentDropdownController extends Controller
 {
-    public function index()
-    {
-        $provinsi = Province::pluck('name', 'id');
-
-        return view('DataMaster.DataDokter', compact('provinsi'));
-    }
-
 
     public function store(Request $request)
     {

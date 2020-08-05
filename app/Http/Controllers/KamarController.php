@@ -61,7 +61,8 @@ class KamarController extends Controller
             ['kd_kamar' => $request->Kamar_id],
 
             [
-                'nama_kamar' => $request->namakamar,
+                'nama_kamar' => $request->kamar,
+                'nomor' => $request->nomor,
                 'kelas' => $request->kelas,
                 'jumlah_kasur' => $request->jumlahkasur
             ]

@@ -47,12 +47,6 @@ class PasienController extends Controller
                 ->make(true);
         }
 
-        // $pasien = Pasien::all();
-        // $dokter = Dokter::all(['kd_dokter', 'nama_dokter']);
-        // $kamar = Kamar::all(['kd_kamar', 'nama_kamar', 'jumlah_kasur']);
-
-        // return View::make('DataMaster.dataPasien', compact('pasien'));
-
         $provinsi = Province::pluck('name', 'id');
         return view('DataMaster.DataPasien', compact('provinsi'));
     }

@@ -9,7 +9,7 @@ use App\Pasien;
 use App\Dokter;
 use App\Registrasi;
 use Illuminate\Support\Facades\View;
-use Monolog\Registry;
+
 
 class RegistrasiController extends Controller
 {
@@ -105,7 +105,7 @@ class RegistrasiController extends Controller
         // ]);
 
 
-        Registrasi::updateOrCreate(
+        $registrasi = Registrasi::updateOrCreate(
             ['kd_reg' => $request->Reg_id],
 
             [
@@ -116,13 +116,14 @@ class RegistrasiController extends Controller
         );
 
         $kamar = Kamar::findOrFail($request->namakamar);
-        // if ($kamar->kd_kamar == $request->namakamar) {
-        //     $kamar->save();
-        // }
 
-        $kamar->jumlah_kasur -= 1;
-        $kamar->save();
 
+        if ($registrasi->isDirty($request->namakamar) == false) {
+            $kamar->kd_kamar = $request->namakamar;
+        } else {
+            $kamar->jumlah_kasur -= 1;
+            $kamar->save();
+        }
 
         return response()->json([
             'message' => 'Registrasi Berhasil Disimpan'

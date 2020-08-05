@@ -15,7 +15,7 @@ class Registrasi extends Model
 
     public function kamar()
     {
-        return $this->belongsTo(Kamar::class, 'kd_kamar', 'kd_kamar');
+        return $this->hasOne(Kamar::class, 'kd_kamar', 'kd_kamar');
     }
 
     public function pasien()

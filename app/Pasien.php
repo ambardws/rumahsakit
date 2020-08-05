@@ -18,7 +18,7 @@ class Pasien extends Model
 
     public function kamar()
     {
-        return $this->belongsTo(Kamar::class);
+        return $this->hasOne(Kamar::class);
     }
 
     public function dokter()
