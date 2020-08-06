@@ -47,8 +47,9 @@ class PasienController extends Controller
                 ->make(true);
         }
 
+        $pasien = Pasien::all();
         $provinsi = Province::pluck('name', 'id');
-        return view('DataMaster.DataPasien', compact('provinsi'));
+        return view('DataMaster.DataPasien', compact('pasien', 'provinsi'));
     }
 
 

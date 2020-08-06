@@ -50,13 +50,14 @@
                             <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" value="" required="">
                         </div>
                       </div>
+
                       <div class="form-group">
                         <label for="name" class="col-sm-5 control-label">Jenis Kelamin</label>
                         <div class="col-sm-12">
                           <select class="custom-select" id="jeniskelamin" name="jeniskelamin" aria-label="Example select with button addon">
-                            <option selected>Pilih...</option>
-                            <option value="Laki-Laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                            <option selected>Pilih..</option>
+                            <option value="Laki-Laki">Pria</option>
+                            <option value="Perempuan">Wanita</option>
                           </select>
                         </div>
                       </div>
@@ -110,7 +111,13 @@
                       <div class="form-group">
                         <label class="col-sm-5 control-label">Golongan Darah</label>
                         <div class="col-sm-12">
-                          <input type="text" class="form-control" id="goldarah" name="goldarah" placeholder="Masukkan Gol Darah" value=""  required="">
+                          <select class="custom-select" id="goldarah" name="goldarah" aria-label="Example select with button addon">
+                            <option selected>Pilih..</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">

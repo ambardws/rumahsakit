@@ -17,11 +17,11 @@ class CreateRegistrasiKamarTable extends Migration
         Schema::create('registrasi_kamar', function (Blueprint $table) {
             $table->increments('kd_reg');
             $table->integer('kd_kamar')->unsigned();
-            $table->foreign('kd_kamar')->references('kd_kamar')->on('kamar')->onDelete('cascade');
+            $table->foreign('kd_kamar')->references('kd_kamar')->on('kamar')->onDelete('restrict');
             $table->integer('kd_pasien')->unsigned();
-            $table->foreign('kd_pasien')->references('kd_pasien')->on('pasien')->onDelete('cascade');
+            $table->foreign('kd_pasien')->references('kd_pasien')->on('pasien')->onDelete('restrict');
             $table->integer('kd_dokter')->unsigned();
-            $table->foreign('kd_dokter')->references('kd_dokter')->on('dokter')->onDelete('cascade');
+            $table->foreign('kd_dokter')->references('kd_dokter')->on('dokter')->onDelete('restrict');
 
 
 

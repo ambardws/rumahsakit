@@ -21,7 +21,7 @@ class CreateDoktersTable extends Migration
             $table->string('alamat_dokter', 100);
             $table->string('telepon', 15);
             $table->integer('spesialisasi_id')->unsigned();
-            $table->foreign('spesialisasi_id')->references('kd_spesialisasi')->on('spesialisasi')->onDelete('cascade');
+            $table->foreign('spesialisasi_id')->references('kd_spesialisasi')->on('spesialisasi')->onDelete('restrict');
             $table->timestamps();
         });
     }

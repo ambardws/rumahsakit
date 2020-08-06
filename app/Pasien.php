@@ -11,6 +11,8 @@ class Pasien extends Model
 
     protected $primaryKey = 'kd_pasien';
 
+    protected $jenis_kelamin = ['Pria', 'Wanita'];
+
     protected $fillable = [
         'nik', 'nama_pasien', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat_pasien',  'telepon', 'tinggi_badan', 'berat_badan', 'gol_darah', 'keluhan'
     ];

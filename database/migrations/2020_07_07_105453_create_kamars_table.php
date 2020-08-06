@@ -16,6 +16,7 @@ class CreateKamarsTable extends Migration
         Schema::create('kamar', function (Blueprint $table) {
             $table->increments('kd_kamar');
             $table->string('nama_kamar', 20);
+            $table->string('nomor', 5);
             $table->char('kelas', 10);
             $table->integer('jumlah_kasur');
             $table->timestamps();

@@ -17,14 +17,14 @@ class CreatePasiensTable extends Migration
             $table->increments('kd_pasien');
             $table->string('nik', 20);
             $table->string('nama_pasien', 50);
-            $table->string('jenis_kelamin', 10);
-            $table->string('tempat_lahir', 20);
+            $table->enum('jenis_kelamin', ['Pria', 'Wanita']);
+            $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('alamat_pasien', 100);
             $table->string('telepon', 15);
             $table->integer('tinggi_badan');
             $table->integer('berat_badan');
-            $table->char('gol_darah', 2);
+            $table->enum('gol_darah', ['A', 'B', 'AB', 'O']);
             $table->string('keluhan', 50);
             $table->timestamps();
         });
