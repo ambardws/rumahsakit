@@ -3,9 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Registrasi extends Model
 {
+
+    use LogsActivity;
+
+    protected static $logAttributes = ['pasien.nama_pasien', 'kamar.nama_kamar', 'dokter.nama_dokter'];
+
+    protected static $logOnlyDirty = true;
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "This model has been {$eventName}";
+    }
 
     public $table = "registrasi_kamar";
 
